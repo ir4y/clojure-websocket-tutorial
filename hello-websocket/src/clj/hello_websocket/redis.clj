@@ -12,7 +12,7 @@
     (def listener
       (car/with-new-pubsub-listener 
         spec-server1 {"my-channel" (fn f1 [json] 
-                                     (send! channel json))}
+                                     (send! channel (str json)))}
         (car/subscribe "my-channel")))
     (on-close channel (fn [status]                 
                             (car/close-listener listener)))
