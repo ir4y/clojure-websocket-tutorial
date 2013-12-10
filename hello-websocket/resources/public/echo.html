@@ -1,0 +1,34 @@
+<html>
+    <body>
+        <input id="text">
+        <button onclick="send()">Send</button>
+        <div id="output">
+        </div>
+    </body>
+    <script>
+        var text = document.getElementById('text');
+        var output = document.getElementById('output');
+        var ws = new WebSocket("ws://localhost:8080/echo");
+
+        ws.onopen = function() { display("Connection opened...") };
+
+        ws.onclose = function() { display("Connection closed...") };
+
+        ws.onmessage = function(message) { 
+            display(message.data);
+            text.value = '';
+        };
+        function send(){
+            ws.send(text.value);
+        }
+        function display(message){
+            var p = document.createElement("p");
+            var new_text  = document.createTextNode(message);
+            p.appendChild(new_text);
+            if (output.firstChild)
+                output.insertBefore(p, output.firstChild);
+            else
+                output.appendChild(p)
+        }
+    </script>
+</html>
