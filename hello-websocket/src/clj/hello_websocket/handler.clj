@@ -2,13 +2,14 @@
   (:use compojure.core)
   (:require [compojure.handler :as handler]
             [compojure.route :as route]
+            [ring.util.response :as resp]
             [org.httpkit.server :as kit]
             [hello-websocket.echo :as echo]
             [hello-websocket.pubsubatom :as pubsubatom]
             [hello-websocket.redis :as redis]))
 
 (defroutes app-routes
-  (GET "/" [] "Hello World")
+  (GET "/" [] (resp/resource-response "index.html" {:root "public"}))
   (GET "/echo"  [] echo/handler)
   (GET "/atom"  [] pubsubatom/handler)
   (GET "/redis" [] redis/handler)

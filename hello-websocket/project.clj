@@ -7,4 +7,14 @@
                  [http-kit "2.1.13"]]
   :profiles
   {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]]}}
-  :main hello-websocket.handler)
+  :source-paths  ["src/clj" "src/cljs"]
+  :main hello-websocket.handler
+  :plugins [[lein-cljsbuild "1.0.1-SNAPSHOT"]]
+   :cljsbuild {
+    :builds [{
+        :source-paths ["src/cljs"]
+        :compiler {
+          :output-to "resources/public/js/main.js"
+          :optimizations :whitespace
+          :pretty-print true}}]}
+  )
