@@ -1,0 +1,12 @@
+<html>
+    <body>
+        <input id="text">
+        <button onclick="hello_websocket.send()">Send</button>
+        <div id="output">
+        </div>
+    </body>
+    <script src="/js/main.js"></script>
+    <script>
+        hello_websocket.init_websocket("ws://localhost:8080/redis");
+    </script>
+</html>
