@@ -10,6 +10,6 @@
     (on-receive channel (fn [json]
                               (reset! my-channel json)))
     (add-watch my-channel channel
-      (fn [_ _ _ json]
+      (fn [_channel _atom _old_json json]
         (send! channel json)))))
 
